@@ -1,0 +1,13 @@
+data:
+  lists:
+    - uId: 10030
+      uName: dxzq
+      tableName: mg_dxzq
+      info:
+        phone: phone
+        fax: fax
+    - uId: 10031
+      uName: dazq
+      tableName: mg_dazq
+      info:
+        phone: tel
