@@ -1,13 +1,25 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /ymltest
+jdbc:
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+  username: root
+  password: 55957572
+mybatis:
+  configFile: mybatis-config.xml
+  mapperPath: /mapper/**.xml
 data:
   lists:
     - uId: 10030
       uName: dxzq
-      tableName: mg_dxzq
+      tableName: tb_dxzq
       info:
         phone: phone
         fax: fax
     - uId: 10031
       uName: dazq
-      tableName: mg_dazq
+      tableName: tb_dazq
       info:
         phone: tel
