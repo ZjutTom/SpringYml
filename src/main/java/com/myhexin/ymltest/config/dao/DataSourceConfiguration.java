@@ -1,12 +1,12 @@
 package com.myhexin.ymltest.config.dao;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.alibaba.druid.pool.DruidDataSource;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.beans.PropertyVetoException;
+import javax.sql.DataSource;
 
 @Configuration
 @MapperScan("com.myhexin.ymltest.dao")
@@ -21,17 +21,12 @@ public class DataSourceConfiguration {
     private String jdbcPassword;
 
     @Bean(name="dataSource")
-    public ComboPooledDataSource createDataSource() throws PropertyVetoException {
-        ComboPooledDataSource dataSource = new ComboPooledDataSource();
-        dataSource.setDriverClass(jdbcDriver);
-        dataSource.setJdbcUrl(jdbcUrl);
-        dataSource.setUser(jdbcUsername);
-        dataSource.setPassword(jdbcPassword);
-        dataSource.setMaxPoolSize(30);
-        dataSource.setMinPoolSize(10);
-        dataSource.setAutoCommitOnClose(false);
-        dataSource.setCheckoutTimeout(10000);
-        dataSource.setAcquireRetryAttempts(2);
-        return dataSource;
+    public DataSource dataSource() {
+        DruidDataSource druidDataSource = new DruidDataSource();
+        druidDataSource.setDriverClassName(jdbcDriver);
+        druidDataSource.setUrl(jdbcUrl);
+        druidDataSource.setUsername(jdbcUsername);
+        druidDataSource.setPassword(jdbcPassword);
+        return druidDataSource;
     }
 }

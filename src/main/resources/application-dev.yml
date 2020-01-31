@@ -23,3 +23,4 @@ data:
       tableName: tb_dazq
       info:
         phone: tel
+        fax: fax

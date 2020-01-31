@@ -24,21 +24,26 @@ public class MgService {
         String statusMsg = "success";
 
         String id = "1001";
+        String uId = "10030";
         String userId = "100010";
         List<U> uList = mgComponent.getLists();
         for (U u : uList) {
-            String uId = u.getuId();
-            if(uId.equals("10030")) {
+            if(u.getuId().equals(uId)) {
                 String uName = u.getuName();
                 String tableName = u.getTableName();
                 Map<String, String> valueKeyMap = getValueKeyMap(u);
                 Map<String, Object> info = new HashMap<>();
                 for (Map.Entry<String, String> entry : valueKeyMap.entrySet()) {
                     String key = entry.getValue();
-                    String value = String.valueOf(params.get(key));
+                    String value = String.valueOf(params.get(entry.getKey()));
                     info.put(key, value);
                 }
-                infoService.insertInfo(info, tableName, id, uId, userId);
+                boolean isExist = infoService.queryInfoById(tableName, id);
+                if(!isExist) {
+                    infoService.insertInfo(info, tableName, id, uId, userId);
+                } else {
+                    infoService.updateInfo(info, tableName, id);
+                }
             }
         }
 
